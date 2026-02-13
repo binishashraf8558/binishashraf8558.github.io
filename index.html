@@ -1240,11 +1240,13 @@
             .btn { width: 100%; justify-content: center; }
 
             .hero-stats {
-                grid-template-columns: 1fr;
-                gap: var(--space-md);
+                grid-template-columns: repeat(3, 1fr);
+                gap: var(--space-sm);
                 text-align: center;
             }
             .stat-item { text-align: center; }
+            .stat-number { font-size: 2rem; }
+            .stat-label { font-size: 0.75rem; }
 
             .badges-wrapper { gap: var(--space-xs); }
             .badge { font-size: 0.8rem; padding: 0.4rem var(--space-sm); }
