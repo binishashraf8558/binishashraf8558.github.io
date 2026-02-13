@@ -1276,14 +1276,39 @@
         }
 
 
-/* ✅ Mobile: badge → heading gap reduce */
+/* ================================
+   ✅ MOBILE HERO SPACING + STATS FIX
+   ================================ */
 @media (max-width: 640px){
-  .hero-badge{
-    margin-bottom: 8px !important;
+
+  /* Badge upar ka extra gap kam */
+  .hero-content{
+    margin-top: -18px !important;   /* adjust: -14px to -24px if needed */
   }
 
+  .hero-badge{
+    margin-bottom: 6px !important;
+  }
+
+  /* Heading tight spacing */
   .hero h1{
     margin-top: 0 !important;
+    line-height: 1.22 !important;
+  }
+
+  /* Stats ek line me */
+  .hero-stats{
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 10px !important;
+    text-align: center;
+  }
+
+  .stat-number{
+    font-size: 1.6rem !important;
+  }
+
+  .stat-label{
+    font-size: 0.75rem !important;
   }
 }
 
@@ -2042,6 +2067,7 @@
     </script>
 </body>
 </html>
+
 
 
 
