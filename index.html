@@ -1,2075 +1,866 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Binish Batool - Professional Web Developer & Shopify Expert</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-    <style>
-        /* ========================================
-           RESET & BASE STYLES
-        ======================================== */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            /* Brand Colors */
-            --accent-primary: #9b046f;
-            --accent-glow: rgba(155, 4, 111, 0.3);
-            --accent-light: rgba(155, 4, 111, 0.1);
-
-            /* Background Colors */
-            --bg-primary: #0b0b0f;
-            --bg-secondary: #14141a;
-            --bg-card: #1a1a24;
-            --bg-glass: rgba(26, 26, 36, 0.6);
-
-            /* Text Colors */
-            --text-primary: #ffffff;
-            --text-secondary: #b4b4c8;
-            --text-muted: #6e6e88;
-
-            /* Gradients */
-            --gradient-primary: linear-gradient(135deg, #9b046f 0%, #d946ef 100%);
-            --gradient-secondary: linear-gradient(135deg, #14141a 0%, #1a1a24 100%);
-            --gradient-mesh: radial-gradient(circle at 20% 50%, rgba(155, 4, 111, 0.15) 0%, transparent 50%),
-                             radial-gradient(circle at 80% 80%, rgba(217, 70, 239, 0.1) 0%, transparent 50%);
-
-            /* Spacing */
-            --space-xs: 0.5rem;
-            --space-sm: 1rem;
-            --space-md: 1.5rem;
-            --space-lg: 2rem;
-            --space-xl: 3rem;
-            --space-2xl: 4rem;
-            --space-3xl: 6rem;
-
-            /* Border Radius */
-            --radius-sm: 8px;
-            --radius-md: 16px;
-            --radius-lg: 24px;
-            --radius-xl: 32px;
-            --radius-full: 9999px;
-
-            /* Shadows */
-            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
-            --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.2);
-            --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.3);
-            --shadow-glow: 0 8px 32px var(--accent-glow);
-
-            /* Typography */
-            --font-primary: 'Plus Jakarta Sans', sans-serif;
-
-            /* ✅ FIX: Navbar height variable */
-            --nav-height: 84px;
-        }
-
-        html { scroll-behavior: smooth; }
-
-        body {
-            font-family: var(--font-primary);
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            line-height: 1.6;
-            overflow-x: hidden;
-            -webkit-text-size-adjust: 100%;
-            text-rendering: optimizeLegibility;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--gradient-mesh);
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 10px; }
-        ::-webkit-scrollbar-track { background: var(--bg-secondary); }
-        ::-webkit-scrollbar-thumb { background: var(--accent-primary); border-radius: var(--radius-full); }
-
-        /* ========================================
-           CONTAINER & LAYOUT
-        ======================================== */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 var(--space-lg);
-            position: relative;
-            z-index: 1;
-        }
-
-        section { padding: var(--space-3xl) 0; }
-
-        /* ========================================
-           NAVIGATION
-        ======================================== */
-        .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background: rgba(11, 11, 15, 0.8);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(155, 4, 111, 0.1);
-            z-index: 1000;
-            transition: all 0.3s ease;
-            height: var(--nav-height);
-        }
-
-        .navbar.scrolled {
-            background: rgba(11, 11, 15, 0.95);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: var(--space-md) var(--space-lg);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 100%;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 800;
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: -0.5px;
-        }
-
-
-
-
-
-        .nav-menu {
-            display: flex;
-            gap: var(--space-xl);
-            list-style: none;
-            align-items: center;
-        }
-
-        .nav-menu a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.95rem;
-            transition: color 0.3s ease;
-            position: relative;
-        }
-
-        .nav-menu a:hover { color: var(--text-primary); }
-
-        .nav-menu a::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--gradient-primary);
-            transition: width 0.3s ease;
-        }
-
-        .nav-menu a:hover::after { width: 100%; }
-
-        .nav-cta {
-            padding: 0.75rem 1.75rem;
-            background: var(--gradient-primary);
-            color: white;
-            border: none;
-            border-radius: var(--radius-full);
-            font-weight: 700;
-            font-size: 0.95rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-        }
-
-        .nav-cta:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-glow);
-        }
-
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: var(--text-primary);
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        /* ========================================
-           HERO SECTION
-        ======================================== */
-        .hero {
-            min-height: 100vh;
-            display: grid;
-            grid-template-columns: 1.2fr 1fr;
-            align-items: center;
-            gap: var(--space-3xl);
-            padding-top: calc(var(--nav-height) + var(--space-2xl) + env(safe-area-inset-top));
-        }
-
-        .hero-content { animation: fadeInUp 0.8s ease-out; }
-
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: var(--space-xs);
-            padding: var(--space-xs) var(--space-md);
-            background: var(--accent-light);
-            border: 1px solid rgba(155, 4, 111, 0.2);
-            border-radius: var(--radius-full);
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: var(--accent-primary);
-            margin-bottom: var(--space-md);
-        }
-
-        .hero-badge::before { content: '✦'; font-size: 0.7rem; }
-
-        .hero h1 {
-            font-size: 4.5rem;
-            font-weight: 800;
-            line-height: 1.18;
-            margin-bottom: var(--space-md);
-            letter-spacing: -2px;
-            padding-top: 0.22em;
-            padding-bottom: 0.08em;
-            overflow: visible;
-            transform: translateZ(0);
-            -webkit-transform: translateZ(0);
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
-        }
-
-        .hero h1 .highlight {
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            display: inline-block;
-            padding-top: 0.06em;
-        }
-
-        .hero-role {
-            font-size: 1.5rem;
-            color: var(--text-secondary);
-            font-weight: 600;
-            margin-bottom: var(--space-md);
-        }
-
-        .hero-description {
-            font-size: 1.15rem;
-            color: var(--text-secondary);
-            line-height: 1.8;
-            margin-bottom: var(--space-xl);
-            max-width: 90%;
-        }
-
-        .hero-cta {
-            display: flex;
-            gap: var(--space-md);
-            flex-wrap: wrap;
-            margin-bottom: var(--space-2xl);
-        }
-
-        .btn {
-            padding: 1rem 2rem;
-            border-radius: var(--radius-full);
-            font-weight: 700;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: var(--space-xs);
-            border: none;
-        }
-
-        .btn-primary {
-            background: var(--gradient-primary);
-            color: white;
-            box-shadow: var(--shadow-md);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-glow);
-        }
-
-        .btn-secondary {
-            background: var(--bg-card);
-            color: var(--text-primary);
-            border: 1px solid rgba(155, 4, 111, 0.2);
-        }
-
-        .btn-secondary:hover {
-            background: var(--accent-light);
-            border-color: var(--accent-primary);
-        }
-
-        .btn-link {
-            background: transparent;
-            color: var(--accent-primary);
-            padding: 1rem 0;
-        }
-
-        .btn-link:hover { gap: var(--space-sm); }
-
-        .hero-stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: var(--space-lg);
-        }
-
-        .stat-item { text-align: left; }
-
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: 800;
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            line-height: 1;
-            margin-bottom: var(--space-xs);
-        }
-
-        .stat-label {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            font-weight: 600;
-        }
-
-        .hero-image {
-            position: relative;
-            animation: fadeInRight 1s ease-out;
-        }
-
-        .hero-image-frame {
-            position: relative;
-            width: 100%;
-            aspect-ratio: 1;
-            border-radius: var(--radius-xl);
-            overflow: hidden;
-            background: var(--gradient-primary);
-            padding: 4px;
-        }
-
-        .hero-image-inner {
-            width: 100%;
-            height: 100%;
-            background: var(--bg-card);
-            border-radius: calc(var(--radius-xl) - 4px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-image-inner::before {
-            content: '';
-            position: absolute;
-            width: 200px;
-            height: 200px;
-            background: var(--accent-glow);
-            border-radius: 50%;
-            filter: blur(60px);
-        }
-
-        .hero-portrait {
-            position: relative;
-            z-index: 1;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center;
-            display: block;
-        }
-
-        .floating-shape {
-            position: absolute;
-            pointer-events: none;
-            animation: float 6s ease-in-out infinite;
-        }
-
-        .shape-1 {
-            top: 10%;
-            left: -10%;
-            width: 120px;
-            height: 120px;
-            background: var(--accent-glow);
-            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-            filter: blur(40px);
-        }
-
-        .shape-2 {
-            bottom: 10%;
-            right: -10%;
-            width: 150px;
-            height: 150px;
-            background: rgba(217, 70, 239, 0.2);
-            border-radius: 50%;
-            filter: blur(40px);
-            animation-delay: 2s;
-        }
-
-        /* ========================================
-           TRUSTED BADGES ROW
-        ======================================== */
-        .trusted-row {
-            padding: var(--space-xl) 0;
-            background: var(--bg-glass);
-            backdrop-filter: blur(20px);
-            border-top: 1px solid rgba(155, 4, 111, 0.1);
-            border-bottom: 1px solid rgba(155, 4, 111, 0.1);
-        }
-
-        .badges-wrapper {
-            display: flex;
-            gap: var(--space-md);
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .badge {
-            padding: var(--space-xs) var(--space-md);
-            background: var(--bg-card);
-            border: 1px solid rgba(155, 4, 111, 0.2);
-            border-radius: var(--radius-full);
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: var(--text-secondary);
-            transition: all 0.3s ease;
-        }
-
-        .badge:hover {
-            border-color: var(--accent-primary);
-            color: var(--text-primary);
-            transform: translateY(-2px);
-        }
-
-        /* ========================================
-           SECTION HEADERS
-        ======================================== */
-        .section-header {
-            text-align: center;
-            margin-bottom: var(--space-3xl);
-        }
-
-        .section-tag {
-            display: inline-block;
-            padding: var(--space-xs) var(--space-md);
-            background: var(--accent-light);
-            border: 1px solid rgba(155, 4, 111, 0.2);
-            border-radius: var(--radius-full);
-            font-size: 0.85rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--accent-primary);
-            margin-bottom: var(--space-md);
-        }
-
-        .section-title {
-            font-size: 3rem;
-            font-weight: 800;
-            margin-bottom: var(--space-md);
-            letter-spacing: -1px;
-        }
-
-        .section-subtitle {
-            font-size: 1.15rem;
-            color: var(--text-secondary);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        /* ========================================
-           ABOUT SECTION
-        ======================================== */
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1.3fr 1fr;
-            gap: var(--space-3xl);
-            align-items: start;
-        }
-
-        .about-content {
-            background: var(--bg-card);
-            padding: var(--space-xl);
-            border-radius: var(--radius-lg);
-            border: 1px solid rgba(155, 4, 111, 0.1);
-        }
-
-        .about-content h3 {
-            font-size: 1.8rem;
-            margin-bottom: var(--space-md);
-            font-weight: 700;
-        }
-
-        .about-content p {
-            font-size: 1.05rem;
-            color: var(--text-secondary);
-            line-height: 1.8;
-            margin-bottom: var(--space-md);
-        }
-
-        .about-content .highlight-text {
-            color: var(--accent-primary);
-            font-weight: 700;
-        }
-
-        .about-highlights { display: grid; gap: var(--space-md); }
-
-        .highlight-card {
-            background: var(--bg-card);
-            padding: var(--space-lg);
-            border-radius: var(--radius-md);
-            border: 1px solid rgba(155, 4, 111, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .highlight-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent-primary);
-            box-shadow: var(--shadow-glow);
-        }
-
-        .highlight-icon {
-            width: 48px;
-            height: 48px;
-            background: var(--gradient-primary);
-            border-radius: var(--radius-md);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            margin-bottom: var(--space-sm);
-        }
-
-        .highlight-card h4 {
-            font-size: 1.1rem;
-            margin-bottom: var(--space-xs);
-            font-weight: 700;
-        }
-
-        .highlight-card p {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
-
-        /* ========================================
-           SKILLS SECTION
-        ======================================== */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: var(--space-lg);
-        }
-
-        .skill-card {
-            background: var(--bg-card);
-            padding: var(--space-xl);
-            border-radius: var(--radius-lg);
-            border: 1px solid rgba(155, 4, 111, 0.1);
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .skill-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: var(--gradient-primary);
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.4s ease;
-        }
-
-        .skill-card:hover {
-            transform: translateY(-8px);
-            border-color: var(--accent-primary);
-            box-shadow: var(--shadow-glow);
-        }
-
-        .skill-card:hover::before { transform: scaleX(1); }
-
-        .skill-icon {
-            width: 64px;
-            height: 64px;
-            background: var(--gradient-primary);
-            border-radius: var(--radius-md);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            margin-bottom: var(--space-md);
-        }
-
-        .skill-card h3 {
-            font-size: 1.4rem;
-            margin-bottom: var(--space-sm);
-            font-weight: 700;
-        }
-
-        .skill-card p {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            margin-bottom: var(--space-md);
-        }
-
-        .skill-tags { display: flex; flex-wrap: wrap; gap: var(--space-xs); }
-
-        .skill-tag {
-            padding: 0.4rem 0.9rem;
-            background: var(--accent-light);
-            border: 1px solid rgba(155, 4, 111, 0.2);
-            border-radius: var(--radius-full);
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: var(--text-secondary);
-        }
-
-        /* ========================================
-           EXPERIENCE TIMELINE
-        ======================================== */
-        .timeline {
-            position: relative;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 3px;
-            height: 100%;
-            background: var(--gradient-primary);
-            opacity: 0.3;
-        }
-
-        .timeline-item {
-            position: relative;
-            margin-bottom: var(--space-3xl);
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: var(--space-3xl);
-        }
-
-        .timeline-item:nth-child(even) .timeline-content { grid-column: 2; }
-
-        .timeline-dot {
-            position: absolute;
-            left: 50%;
-            top: 24px;
-            transform: translateX(-50%);
-            width: 24px;
-            height: 24px;
-            background: var(--gradient-primary);
-            border-radius: 50%;
-            box-shadow: 0 0 0 8px rgba(155, 4, 111, 0.2);
-            z-index: 2;
-        }
-
-        .timeline-content {
-            background: var(--bg-card);
-            padding: var(--space-xl);
-            border-radius: var(--radius-lg);
-            border: 1px solid rgba(155, 4, 111, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .timeline-content:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent-primary);
-            box-shadow: var(--shadow-glow);
-        }
-
-        .timeline-date {
-            display: inline-block;
-            padding: var(--space-xs) var(--space-md);
-            background: var(--gradient-primary);
-            border-radius: var(--radius-full);
-            font-size: 0.85rem;
-            font-weight: 700;
-            margin-bottom: var(--space-md);
-        }
-
-        .timeline-content h3 {
-            font-size: 1.5rem;
-            margin-bottom: var(--space-xs);
-            font-weight: 700;
-        }
-
-        .timeline-company {
-            color: var(--accent-primary);
-            font-weight: 600;
-            margin-bottom: var(--space-md);
-        }
-
-        .timeline-content ul { list-style: none; margin-top: var(--space-md); }
-
-        .timeline-content li {
-            padding-left: var(--space-md);
-            margin-bottom: var(--space-sm);
-            position: relative;
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-        }
-
-        .timeline-content li::before {
-            content: '→';
-            position: absolute;
-            left: 0;
-            color: var(--accent-primary);
-            font-weight: 700;
-        }
-
-        /* ========================================
-           PROJECTS SECTION
-        ======================================== */
-        .projects-filter {
-            display: flex;
-            gap: var(--space-sm);
-            justify-content: center;
-            margin-bottom: var(--space-2xl);
-            flex-wrap: wrap;
-        }
-
-        .filter-btn {
-            padding: var(--space-sm) var(--space-lg);
-            background: var(--bg-card);
-            border: 1px solid rgba(155, 4, 111, 0.2);
-            border-radius: var(--radius-full);
-            color: var(--text-secondary);
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            white-space: nowrap;
-        }
-
-        .filter-btn:hover,
-        .filter-btn.active {
-            background: var(--gradient-primary);
-            color: white;
-            border-color: var(--accent-primary);
-        }
-
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: var(--space-xl);
-        }
-
-        .project-card {
-            background: var(--bg-card);
-            border-radius: var(--radius-lg);
-            overflow: hidden;
-            border: 1px solid rgba(155, 4, 111, 0.1);
-            transition: all 0.4s ease;
-            cursor: pointer;
-            min-width: 0;
-        }
-
-        .project-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--accent-primary);
-            box-shadow: var(--shadow-glow);
-        }
-
-        .project-image {
-            width: 100%;
-            height: 240px;
-            background: linear-gradient(135deg, var(--accent-primary) 0%, rgba(217, 70, 239, 0.8) 100%);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .project-image img{
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-
-        .project-image::after { content: ''; }
-
-        .project-content { padding: var(--space-xl); }
-
-        .project-tags {
-            display: flex;
-            gap: var(--space-xs);
-            margin-bottom: var(--space-md);
-            flex-wrap: wrap;
-        }
-
-        .project-tag {
-            padding: 0.3rem 0.8rem;
-            background: var(--accent-light);
-            border: 1px solid rgba(155, 4, 111, 0.2);
-            border-radius: var(--radius-full);
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: var(--accent-primary);
-        }
-
-        .project-content h3 {
-            font-size: 1.4rem;
-            margin-bottom: var(--space-sm);
-            font-weight: 700;
-        }
-
-        .project-result {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            margin-bottom: var(--space-md);
-            line-height: 1.6;
-        }
-
-        .project-link {
-            color: var(--accent-primary);
-            font-weight: 600;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: var(--space-xs);
-            transition: gap 0.3s ease;
-        }
-
-        .project-link:hover { gap: var(--space-sm); }
-
-        /* ========================================
-           SERVICES SECTION
-        ======================================== */
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: var(--space-xl);
-        }
-
-        .service-card {
-            background: var(--bg-card);
-            padding: var(--space-xl);
-            border-radius: var(--radius-lg);
-            border: 1px solid rgba(155, 4, 111, 0.1);
-            text-align: center;
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .service-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
-
-        .service-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--accent-primary);
-            box-shadow: var(--shadow-glow);
-        }
-
-        .service-card:hover::before { opacity: 1; }
-
-        .service-icon {
-            width: 80px;
-            height: 80px;
-            background: var(--gradient-primary);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.5rem;
-            margin: 0 auto var(--space-md);
-            position: relative;
-        }
-
-        .service-card h3 {
-            font-size: 1.4rem;
-            margin-bottom: var(--space-sm);
-            font-weight: 700;
-            position: relative;
-        }
-
-        .service-card p {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            line-height: 1.7;
-            position: relative;
-        }
-
-        /* ========================================
-           TESTIMONIALS SECTION
-        ======================================== */
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: var(--space-xl);
-        }
-
-        .testimonial-card {
-            background: var(--bg-card);
-            padding: var(--space-xl);
-            border-radius: var(--radius-lg);
-            border: 1px solid rgba(155, 4, 111, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .testimonial-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent-primary);
-            box-shadow: var(--shadow-glow);
-        }
-
-        .quote-icon {
-            font-size: 3.5rem;
-            color: var(--accent-primary);
-            opacity: 0.3;
-            line-height: 1;
-            margin-bottom: var(--space-sm);
-        }
-
-        .testimonial-text {
-            color: var(--text-secondary);
-            font-size: 1.05rem;
-            line-height: 1.7;
-            margin-bottom: var(--space-lg);
-            font-style: italic;
-        }
-
-        .testimonial-author {
-            font-weight: 700;
-            font-size: 1.05rem;
-            margin-bottom: var(--space-xs);
-        }
-
-        .testimonial-role { color: var(--text-muted); font-size: 0.9rem; }
-
-        .testimonial-placeholder {
-            display: inline-block;
-            padding: 0.3rem 0.8rem;
-            background: var(--accent-light);
-            border-radius: var(--radius-full);
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: var(--accent-primary);
-            margin-top: var(--space-sm);
-        }
-
-        /* ========================================
-           CONTACT SECTION
-        ======================================== */
-        .contact-wrapper {
-            max-width: 900px;
-            margin: 0 auto;
-            background: var(--bg-card);
-            padding: var(--space-3xl);
-            border-radius: var(--radius-xl);
-            border: 1px solid rgba(155, 4, 111, 0.2);
-            text-align: center;
-        }
-
-        .contact-wrapper h2 {
-            font-size: 2.5rem;
-            margin-bottom: var(--space-md);
-            font-weight: 800;
-        }
-
-        .contact-wrapper p {
-            font-size: 1.1rem;
-            color: var(--text-secondary);
-            margin-bottom: var(--space-2xl);
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .contact-form { display: grid; gap: var(--space-md); margin-bottom: var(--space-2xl); }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: var(--space-md);
-        }
-
-        .form-group { text-align: left; }
-
-        .form-group label {
-            display: block;
-            margin-bottom: var(--space-xs);
-            font-weight: 600;
-            font-size: 0.9rem;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: var(--space-md);
-            background: var(--bg-secondary);
-            border: 1px solid rgba(155, 4, 111, 0.2);
-            border-radius: var(--radius-md);
-            color: var(--text-primary);
-            font-family: var(--font-primary);
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--accent-primary);
-            box-shadow: 0 0 0 3px var(--accent-light);
-        }
-
-        .form-group textarea { resize: vertical; min-height: 120px; }
-
-        .contact-info-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: var(--space-lg);
-            margin-bottom: var(--space-2xl);
-        }
-
-        .contact-info-item { text-align: center; }
-
-        .contact-icon {
-            width: 56px;
-            height: 56px;
-            background: var(--gradient-primary);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            margin: 0 auto var(--space-sm);
-        }
-
-        .contact-info-item h4 {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            margin-bottom: var(--space-xs);
-            font-weight: 600;
-        }
-
-        .contact-info-item a {
-            color: var(--text-primary);
-            text-decoration: none;
-            font-weight: 600;
-            transition: color 0.3s ease;
-        }
-
-        .contact-info-item a:hover { color: var(--accent-primary); }
-
-        .social-links { display: flex; gap: var(--space-md); justify-content: center; }
-
-        .social-link {
-            width: 48px;
-            height: 48px;
-            background: var(--bg-secondary);
-            border: 1px solid rgba(155, 4, 111, 0.2);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-primary);
-            text-decoration: none;
-            font-size: 1.3rem;
-            transition: all 0.3s ease;
-        }
-
-        .social-link:hover {
-            background: var(--gradient-primary);
-            border-color: var(--accent-primary);
-            transform: translateY(-3px);
-        }
-
-        /* ========================================
-           FOOTER
-        ======================================== */
-        footer {
-            background: var(--bg-secondary);
-            padding: var(--space-2xl) 0;
-            border-top: 1px solid rgba(155, 4, 111, 0.1);
-            text-align: center;
-        }
-
-        .footer-text { color: var(--text-muted); font-size: 0.9rem; }
-        .footer-text span { color: var(--accent-primary); }
-
-        /* ========================================
-           ANIMATIONS
-        ======================================== */
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(40px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes fadeInRight {
-            from { opacity: 0; transform: translateX(40px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(5deg); }
-        }
-
-        /* Scroll Reveal */
-        .reveal {
-            opacity: 0;
-            transform: translateY(60px);
-            transition: all 0.8s ease-out;
-        }
-
-        .reveal.active { opacity: 1; transform: translateY(0); }
-
-        /* ========================================
-           MOBILE RESPONSIVE
-           ✅✅ FIXED: Mobile navbar overlap issue
-        ======================================== */
-        @media (max-width: 968px) {
-            /* ✅ Slightly bigger navbar on tablets */
-            :root{ --nav-height: 80px; }
-
-            .hero h1 { font-size: 3rem; line-height: 1.2; }
-            .section-title { font-size: 2.2rem; }
-
-            .hero {
-                grid-template-columns: 1fr;
-                text-align: center;
-                gap: var(--space-2xl);
-                /* ✅ Extra padding to prevent navbar overlap */
-                padding-top: 140px !important;
-                padding-bottom: var(--space-2xl);
-            }
-
-            .hero-description { max-width: 100%; }
-            .hero-cta { justify-content: center; }
-            .hero-image { width: 100%; }
-            .hero-image-frame {
-                max-width: 380px;
-                margin: 0 auto;
-            }
-
-            .nav-menu { display: none; }
-            .mobile-menu-btn { display: block; }
-            .about-grid { grid-template-columns: 1fr; }
-
-            .timeline::before { left: 24px; }
-            .timeline-item {
-                grid-template-columns: 1fr;
-                padding-left: 60px;
-            }
-            .timeline-dot { left: 24px; }
-            .timeline-item:nth-child(even) .timeline-content { grid-column: 1; }
-
-            .projects-grid { grid-template-columns: 1fr; }
-            .project-image { height: 220px; }
-
-            .services-grid,
-            .testimonials-grid { grid-template-columns: 1fr; }
-
-            .form-row { grid-template-columns: 1fr; }
-
-            section { padding: var(--space-2xl) 0; }
-            .container { padding: 0 var(--space-md); }
-
-            .projects-filter { justify-content: center; gap: 0.6rem; }
-            .filter-btn { padding: 0.65rem 1.1rem; font-size: 0.9rem; }
-        }
-
-        /* ✅✅ CRITICAL FIX: iPhone/Mobile h1 cutting issue */
-        @media (max-width: 640px) {
-            :root{ --nav-height: 70px; }
-
-            .hero h1 { 
-                font-size: 2.5rem; 
-                line-height: 1.4 !important;
-                padding-top: 0.5em !important;
-                margin-top: 2rem !important;
-            }
-            
-            .hero-role { font-size: 1.2rem; }
-            .section-title { font-size: 1.8rem; }
-
-            /* ✅✅ CRITICAL: Fixed padding on mobile - 160px se heading kabhi navbar ke niche nahi jaegi */
-            .hero{
-                padding-top: 160px !important;
-                min-height: auto !important;
-            }
-            
-            /* ✅ Badge ko bhi thoda niche */
-            .hero-badge {
-                margin-bottom: 1.5rem;
-            }
-
-            .hero-cta { flex-direction: column; }
-            .btn { width: 100%; justify-content: center; }
-
-            .hero-stats {
-                grid-template-columns: 1fr;
-                gap: var(--space-md);
-                text-align: center;
-            }
-            .stat-item { text-align: center; }
-
-            .badges-wrapper { gap: var(--space-xs); }
-            .badge { font-size: 0.8rem; padding: 0.4rem var(--space-sm); }
-
-            .skill-card,
-            .service-card,
-            .testimonial-card { padding: var(--space-lg); }
-
-            .contact-wrapper { padding: var(--space-xl); }
-            .contact-info-grid { grid-template-columns: 1fr; }
-
-            .nav-container { padding: var(--space-sm) var(--space-md); }
-            .logo { font-size: 1.2rem; }
-            .nav-cta { padding: 0.65rem 1.2rem; font-size: 0.9rem; }
-
-            .project-content { padding: 1.25rem; }
-            .project-image { height: 200px; }
-        }
-
-        /* Tablet Breakpoint */
-        @media (min-width: 641px) and (max-width: 968px) {
-            .projects-grid { grid-template-columns: 1fr; }
-            .services-grid { grid-template-columns: repeat(2, 1fr); }
-            .skills-grid { grid-template-columns: repeat(2, 1fr); }
-        }
-
-
-/* ================================
-   ✅ MOBILE HERO SPACING + STATS FIX
-   ================================ */
-@media (max-width: 640px){
-
-  /* Badge upar ka extra gap kam */
-  .hero-content{
-    margin-top: -12px !important;   /* adjust: -14px to -24px if needed */
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Binish Batool — Web Developer & Shopify Expert</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0E1A2B;
+    --bg-2: #0A1421;
+    --surface: #152945;
+    --surface-2: #1D3554;
+    --border: #2A4363;
+    --text: #EAF1F8;
+    --text-muted: #8FA5C2;
+    --accent: #F2A93B;
+    --accent-dim: #C98A2D;
+    --accent-2: #6FE7C9;
+    --red: #F2777A;
+    --yellow: #F2C94C;
+    --green: #6FE7C9;
+    --radius: 14px;
+    --maxw: 1180px;
   }
 
-  .hero-badge{
-    margin-bottom: 6px !important;
+  *{ box-sizing: border-box; margin:0; padding:0; }
+  html{ scroll-behavior: smooth; }
+  body{
+    background: var(--bg);
+    background-image:
+      radial-gradient(circle at 15% 0%, rgba(242,169,59,0.08), transparent 40%),
+      radial-gradient(circle at 85% 20%, rgba(111,231,201,0.06), transparent 45%);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  img{ max-width:100%; display:block; }
+  a{ color: inherit; text-decoration: none; }
+  ul{ list-style:none; }
+
+  h1,h2,h3{ font-family: 'Space Grotesk', sans-serif; font-weight: 600; letter-spacing: -0.01em; }
+  .mono{ font-family: 'IBM Plex Mono', monospace; }
+
+  .wrap{ max-width: var(--maxw); margin: 0 auto; padding: 0 28px; }
+  section{ padding: 110px 0; position: relative; }
+  section[id]{ scroll-margin-top: 90px; }
+  @media (max-width: 640px){ section{ padding: 72px 0; } .wrap{ padding: 0 20px; } }
+
+  .eyebrow{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--accent-2);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+  .eyebrow::before{
+    content: '';
+    width: 26px; height: 1px;
+    background: var(--accent-2);
+    display: inline-block;
   }
 
-  /* Heading tight spacing */
+  /* ---------- NAV ---------- */
+  header{
+    position: fixed; top:0; left:0; right:0; z-index: 100;
+    background: rgba(10,20,33,0.75);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+  }
+  nav.wrap{ display:flex; align-items:center; justify-content:space-between; height: 72px; padding-top:0; padding-bottom:0; }
+  .logo{ display:flex; align-items:center; gap:11px; font-family:'Space Grotesk'; font-weight:700; font-size:1.05rem; }
+  .logo-badge{
+    width: 36px; height: 36px; border-radius: 10px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Space Grotesk', sans-serif; font-weight:700; font-size: 0.92rem;
+    color: #0E1A2B; letter-spacing: -0.02em;
+    box-shadow: 0 6px 16px -4px rgba(242,169,59,0.45);
+    flex-shrink: 0;
+  }
+  .logo .dots{ display:flex; gap:5px; }
+  .logo .dots span{ width:8px; height:8px; border-radius:50%; display:block; }
+  .logo .dots span:nth-child(1){ background: var(--red); }
+  .logo .dots span:nth-child(2){ background: var(--yellow); }
+  .logo .dots span:nth-child(3){ background: var(--green); }
+
+  .nav-links{ display:flex; gap:34px; font-size:0.92rem; color: var(--text-muted); }
+  .nav-links a{ transition: color .2s; position:relative; }
+  .nav-links a:hover{ color: var(--text); }
+  .nav-cta{
+    background: var(--accent); color: #12212F; font-weight:600; font-size:0.88rem;
+    padding: 10px 20px; border-radius: 999px; transition: transform .2s, background .2s;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+  .nav-cta:hover{ background: #ffbf5c; transform: translateY(-1px); }
+  .nav-toggle{ display:none; flex-direction:column; gap:5px; cursor:pointer; background:none; border:none; }
+  .nav-toggle span{ width:24px; height:2px; background: var(--text); }
+
+  @media (max-width: 800px){
+    .nav-links{ display:none; }
+    .nav-toggle{ display:flex; }
+    .nav-cta{ display:none; }
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{ padding-top: 170px; padding-bottom: 90px; }
+  .hero-grid{ display:grid; grid-template-columns: 1.1fr 0.9fr; gap: 60px; align-items:center; }
+  @media (max-width: 900px){ .hero-grid{ grid-template-columns: 1fr; } .hero{ padding-top:130px; } }
+
   .hero h1{
-    margin-top: 0 !important;
-    line-height: 1.22 !important;
+    font-size: clamp(2.4rem, 5vw, 3.6rem);
+    line-height: 1.08;
+    margin-bottom: 22px;
+  }
+  .hero h1 .accent{ color: var(--accent); }
+  .hero p.lead{
+    color: var(--text-muted);
+    font-size: 1.08rem;
+    max-width: 480px;
+    margin-bottom: 34px;
+  }
+  .typed-row{
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 0.95rem;
+    color: var(--accent-2);
+    margin-bottom: 26px;
+    min-height: 24px;
+  }
+  .typed-row .cursor{ display:inline-block; width:8px; background:var(--accent-2); margin-left:2px; animation: blink 1s step-end infinite; }
+  @keyframes blink{ 50%{ opacity:0; } }
+
+  .hero-btns{ display:flex; gap:16px; flex-wrap:wrap; }
+  .btn{
+    padding: 14px 26px; border-radius: 10px; font-weight:600; font-size:0.94rem;
+    display:inline-flex; align-items:center; gap:8px; transition: all .2s;
+  }
+  .btn-primary{ background: var(--accent); color:#12212F; }
+  .btn-primary:hover{ background:#ffbf5c; transform: translateY(-2px); }
+  .btn-ghost{ border:1px solid var(--border); color: var(--text); }
+  .btn-ghost:hover{ border-color: var(--accent-2); color: var(--accent-2); }
+
+  /* browser mock in hero */
+  .browser-mock{
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow:hidden;
+    box-shadow: 0 30px 60px -20px rgba(0,0,0,0.6);
+  }
+  .browser-bar{
+    display:flex; align-items:center; gap:10px;
+    padding: 12px 16px; background: var(--surface-2); border-bottom:1px solid var(--border);
+  }
+  .browser-bar .dots{ display:flex; gap:6px; }
+  .browser-bar .dots span{ width:10px; height:10px; border-radius:50%; }
+  .browser-bar .dots span:nth-child(1){ background: var(--red); }
+  .browser-bar .dots span:nth-child(2){ background: var(--yellow); }
+  .browser-bar .dots span:nth-child(3){ background: var(--green); }
+  .browser-bar .url{
+    flex:1; background: var(--bg-2); border-radius: 6px; padding: 6px 12px;
+    font-family:'IBM Plex Mono', monospace; font-size: 0.78rem; color: var(--text-muted);
+    overflow:hidden; white-space:nowrap; text-overflow:ellipsis;
+  }
+  .browser-body{ padding: 28px; }
+  .fake-line{ height: 10px; border-radius: 4px; background: var(--surface-2); margin-bottom: 12px; }
+  .fake-line.short{ width: 55%; }
+  .fake-line.med{ width: 78%; }
+  .fake-block{
+    margin-top: 20px; height: 110px; border-radius: 10px;
+    background: linear-gradient(135deg, rgba(242,169,59,0.18), rgba(111,231,201,0.12));
+    border: 1px dashed var(--border);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'IBM Plex Mono', monospace; font-size: 0.75rem; color: var(--accent-2);
+  }
+  .fake-btn{ margin-top:18px; width: 120px; height: 32px; border-radius: 8px; background: var(--accent); opacity:0.85; }
+
+  .avatar-frame{
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background: linear-gradient(160deg, rgba(242,169,59,0.12), rgba(111,231,201,0.08));
+  }
+  .avatar-frame img{
+    width: 100%; height: 260px; object-fit: cover; object-position: top center;
+    display:block;
+  }
+  .avatar-caption{
+    display:flex; align-items:center; justify-content:space-between;
+    padding: 14px 16px; gap: 10px;
+  }
+  .avatar-caption .name{ font-family:'Space Grotesk'; font-weight:600; font-size: 0.98rem; }
+  .avatar-caption .role{ font-family:'IBM Plex Mono', monospace; font-size: 0.72rem; color: var(--accent-2); }
+  .avatar-badge{
+    font-family:'IBM Plex Mono', monospace; font-size: 0.68rem; color: var(--bg);
+    background: var(--accent); padding: 4px 10px; border-radius: 999px; font-weight:600;
+    white-space: nowrap;
   }
 
-  /* Stats ek line me */
-  .hero-stats{
-    grid-template-columns: repeat(3, 1fr) !important;
-    gap: 10px !important;
-    text-align: center;
+  /* ---------- STATS ---------- */
+  .stats{ padding: 50px 0; border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+  .stats .wrap{ display:grid; grid-template-columns: repeat(4, 1fr); gap: 20px; text-align:center; }
+  @media (max-width: 700px){ .stats .wrap{ grid-template-columns: repeat(2,1fr); } }
+  .stat h3{ font-size: clamp(1.6rem, 3vw, 2.2rem); color: var(--accent); }
+  .stat p{ color: var(--text-muted); font-size: 0.85rem; margin-top: 6px; font-family:'IBM Plex Mono', monospace; }
+
+  /* ---------- SECTION HEAD ---------- */
+  .section-head{ max-width: 620px; margin-bottom: 56px; }
+  .section-head h2{ font-size: clamp(1.8rem, 3.4vw, 2.4rem); margin-bottom: 14px; }
+  .section-head p{ color: var(--text-muted); }
+
+  /* ---------- PROJECTS ---------- */
+  .filter-row{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 36px; }
+  .filter-btn{
+    font-family:'IBM Plex Mono', monospace; font-size: 0.82rem;
+    padding: 9px 18px; border-radius: 999px; border: 1px solid var(--border);
+    background: transparent; color: var(--text-muted); cursor:pointer; transition: all .2s;
+  }
+  .filter-btn:hover{ color: var(--text); border-color: var(--accent-2); }
+  .filter-btn.active{ background: var(--accent); color: #12212F; border-color: var(--accent); font-weight:600; }
+
+  .projects-grid{ display:grid; grid-template-columns: repeat(2, 1fr); gap: 26px; }
+  @media (max-width: 800px){ .projects-grid{ grid-template-columns: 1fr; } }
+  .project-card.hidden{ display:none; }
+
+  .project-card{
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow:hidden;
+    transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+    display:flex; flex-direction:column;
+  }
+  .project-card:hover{
+    transform: translateY(-6px);
+    border-color: var(--accent-2);
+    box-shadow: 0 24px 48px -20px rgba(111,231,201,0.18);
+  }
+  .project-card .browser-bar .url{ color: var(--text); }
+  .project-body{ padding: 24px 24px 26px; flex:1; display:flex; flex-direction:column; }
+  .project-body .tag-row{ display:flex; gap:8px; flex-wrap:wrap; margin-bottom:14px; }
+  .tag{
+    font-family:'IBM Plex Mono', monospace; font-size: 0.7rem; letter-spacing:.04em;
+    color: var(--accent-2); border: 1px solid rgba(111,231,201,0.35);
+    padding: 4px 10px; border-radius: 999px; text-transform: uppercase;
+  }
+  .project-body h3{ font-size: 1.25rem; margin-bottom: 8px; }
+  .project-body p{ color: var(--text-muted); font-size: 0.92rem; margin-bottom: 18px; flex:1; }
+  .project-link{
+    font-family:'IBM Plex Mono', monospace; font-size: 0.82rem; color: var(--accent);
+    display:inline-flex; align-items:center; gap:6px;
+  }
+  .project-link svg{ transition: transform .2s; }
+  .project-card:hover .project-link svg{ transform: translate(3px,-3px); }
+
+  /* ---------- SKILLS ---------- */
+  .skills-wrap{ display:grid; grid-template-columns: 1fr 1fr; gap: 50px; }
+  @media (max-width: 800px){ .skills-wrap{ grid-template-columns: 1fr; } }
+  .skill-col h3{ font-size: 1.05rem; margin-bottom: 18px; color: var(--accent-2); font-family:'IBM Plex Mono', monospace; text-transform: uppercase; letter-spacing: .06em; font-weight:500; }
+  .chip-row{ display:flex; flex-wrap:wrap; gap: 10px; }
+  .chip{
+    padding: 10px 16px; border-radius: 10px; background: var(--surface);
+    border: 1px solid var(--border); font-size: 0.88rem; color: var(--text);
+    transition: border-color .2s, color .2s;
+  }
+  .chip:hover{ border-color: var(--accent); color: var(--accent); }
+
+  /* ---------- PROCESS ---------- */
+  .process-grid{ display:grid; grid-template-columns: repeat(3, 1fr); gap: 26px; }
+  @media (max-width: 800px){ .process-grid{ grid-template-columns: 1fr; } }
+  .process-card{
+    background: var(--surface); border:1px solid var(--border); border-radius: var(--radius);
+    padding: 30px 26px; position:relative;
+  }
+  .process-card .num{
+    font-family:'IBM Plex Mono', monospace; color: var(--accent); font-size: 0.85rem;
+    display:block; margin-bottom: 16px;
+  }
+  .process-card h3{ font-size: 1.15rem; margin-bottom: 10px; }
+  .process-card p{ color: var(--text-muted); font-size: 0.9rem; }
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{ display:grid; grid-template-columns: 0.8fr 1.2fr; gap: 50px; align-items:center; }
+  @media (max-width: 800px){ .about-grid{ grid-template-columns: 1fr; } }
+  .about-card{
+    background: var(--surface); border:1px solid var(--border); border-radius: var(--radius);
+    padding: 28px;
+  }
+  .about-card .mono{ color: var(--accent-2); font-size: 0.78rem; text-transform:uppercase; letter-spacing: .08em; }
+  .about-card h3{ margin: 10px 0 20px; font-size: 1.3rem; }
+  .about-row{ display:flex; justify-content:space-between; padding: 10px 0; border-top:1px solid var(--border); font-size:0.88rem; }
+  .about-row:first-of-type{ border-top:none; }
+  .about-row span:first-child{ color: var(--text-muted); }
+  .about-text p{ color: var(--text-muted); margin-bottom: 18px; }
+  .about-text strong{ color: var(--text); }
+
+  /* ---------- CONTACT ---------- */
+  .contact{
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    padding: 64px 40px;
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+  }
+  .contact::before{
+    content:'';
+    position:absolute; inset:0;
+    background: radial-gradient(circle at 50% 0%, rgba(242,169,59,0.14), transparent 60%);
+  }
+  .contact h2{ font-size: clamp(1.8rem,4vw,2.6rem); margin-bottom: 16px; position:relative; }
+  .contact p{ color: var(--text-muted); max-width: 480px; margin: 0 auto 32px; position:relative; }
+  .contact .hero-btns{ justify-content:center; position:relative; }
+
+  footer{ border-top: 1px solid var(--border); padding: 56px 0 32px; }
+  .footer-top{
+    display:grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 40px;
+    padding-bottom: 36px; margin-bottom: 28px; border-bottom: 1px solid var(--border);
+  }
+  @media (max-width: 800px){ .footer-top{ grid-template-columns: 1fr; gap: 30px; } }
+  .footer-brand .logo{ margin-bottom: 12px; }
+  .footer-brand p{ color: var(--text-muted); font-size: 0.9rem; max-width: 320px; }
+  .footer-col h4{
+    font-family:'IBM Plex Mono', monospace; font-size: 0.76rem; color: var(--accent-2);
+    text-transform: uppercase; letter-spacing: .08em; margin-bottom: 16px; font-weight:500;
+  }
+  .footer-col ul{ display:flex; flex-direction:column; gap:10px; }
+  .footer-col a, .footer-col span{ color: var(--text-muted); font-size: 0.9rem; transition: color .2s; }
+  .footer-col a:hover{ color: var(--accent-2); }
+  .footer-social{ display:flex; gap:10px; margin-top: 4px; }
+  .footer-social a{
+    width:36px; height:36px; border-radius: 8px; border:1px solid var(--border);
+    display:flex; align-items:center; justify-content:center; font-size: 0.95rem;
+    color: var(--text-muted); transition: all .2s;
+  }
+  .footer-social a:hover{ border-color: var(--accent-2); color: var(--accent-2); transform: translateY(-2px); }
+  .footer-bottom{
+    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;
+    color: var(--text-muted); font-size: 0.82rem; font-family:'IBM Plex Mono', monospace;
+  }
+  .footer-bottom .dots{ display:flex; gap:5px; }
+  .footer-bottom .dots span{ width:7px; height:7px; border-radius:50%; display:block; }
+  .footer-bottom .dots span:nth-child(1){ background: var(--red); }
+  .footer-bottom .dots span:nth-child(2){ background: var(--yellow); }
+  .footer-bottom .dots span:nth-child(3){ background: var(--green); }
+
+  .reveal{ opacity:0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal.in{ opacity:1; transform: translateY(0); }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation: none !important; transition: none !important; }
+    .reveal{ opacity:1; transform:none; }
   }
 
-  .stat-number{
-    font-size: 1.6rem !important;
+  a:focus-visible, button:focus-visible{ outline: 2px solid var(--accent-2); outline-offset: 3px; }
+
+  /* ---------- FLOATING WHATSAPP ---------- */
+  .wa-float{
+    position: fixed; bottom: 24px; right: 24px; z-index: 200;
+    width: 56px; height: 56px; border-radius: 50%;
+    background: #25D366; display:flex; align-items:center; justify-content:center;
+    box-shadow: 0 10px 24px -6px rgba(37,211,102,0.6);
+    transition: transform .2s ease;
   }
-
-  .stat-label{
-    font-size: 0.75rem !important;
-  }
-}
-
-
-
-
-        
-    </style>
+  .wa-float:hover{ transform: translateY(-3px) scale(1.05); }
+  .wa-float svg{ width: 28px; height: 28px; }
+</style>
 </head>
-
 <body>
-    <!-- ========================================
-         NAVIGATION
-    ======================================== -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="logo">BINISH BATOOL</div>
-            <ul class="nav-menu">
-                <li><a href="#about">About</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#experience">Experience</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-            <a href="#contact" class="nav-cta">Hire Me</a>
-            <button class="mobile-menu-btn">☰</button>
-        </div>
-    </nav>
 
-    <!-- ========================================
-         HERO SECTION
-    ======================================== -->
-    <section class="hero container">
-        <div class="hero-content">
-
-            <div class="hero-badge">Professional Web Developer</div>
-            <h1>Hi, I'm <span class="highlight">Binish Batool</span></h1>
-            <p class="hero-role">Web Developer & Digital Solutions Specialist</p>
-            <p class="hero-description">
-                I build modern, responsive websites that drive results. Specializing in WordPress, Shopify, and custom web solutions that combine clean design with optimized performance.
-            </p>
-            <div class="hero-cta">
-                <a href="#contact" class="btn btn-primary">Hire Me →</a>
-                <a href="#projects" class="btn btn-secondary">View Work</a>
-                <a href="#contact" class="btn btn-link">Contact Me →</a>
-            </div>
-            <div class="hero-stats">
-                <div class="stat-item">
-                    <div class="stat-number">35+</div>
-                    <div class="stat-label">Projects Delivered</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">2+</div>
-                    <div class="stat-label">Years Experience</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">95%</div>
-                    <div class="stat-label">Client Satisfaction</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="hero-image">
-            <div class="hero-image-frame">
-                <div class="hero-image-inner">
-                    <img
-                        src="https://i.ibb.co/00x418W/Gemini-Generated-Image-haqq7hhaqq7hhaqq.png"
-                        alt="Binish Batool Portrait"
-                        class="hero-portrait"
-                    >
-                </div>
-            </div>
-            <div class="floating-shape shape-1"></div>
-            <div class="floating-shape shape-2"></div>
-        </div>
-    </section>
-
-    <!-- ========================================
-         TRUSTED BADGES ROW
-    ======================================== -->
-    <div class="trusted-row">
-        <div class="container">
-            <div class="badges-wrapper">
-                <span class="badge">Shopify Expert</span>
-                <span class="badge">WordPress Developer</span>
-                <span class="badge">Speed Optimization</span>
-                <span class="badge">SEO Specialist</span>
-                <span class="badge">UI/UX Design</span>
-                <span class="badge">Responsive Design</span>
-                <span class="badge">E-Commerce</span>
-            </div>
-        </div>
+<header>
+  <nav class="wrap">
+    <div class="logo"><span class="logo-badge">BB</span>Binish Batool</div>
+    <ul class="nav-links">
+      <li><a href="#work">Work</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#process">Process</a></li>
+      <li><a href="#about">About</a></li>
+    </ul>
+    <div style="display:flex; align-items:center; gap:12px;">
+      <a href="https://wa.me/923144290617" target="_blank" rel="noopener" class="nav-cta" style="background:#25D366; color:#0E1A2B; display:flex; align-items:center; gap:6px;">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm0 18.13h-.01a8.2 8.2 0 0 1-4.18-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.36c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.83 2.42a8.18 8.18 0 0 1 2.41 5.83c0 4.55-3.7 8.21-8.25 8.21zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.17.25-.64.81-.78.97-.14.17-.29.19-.53.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.14.16-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.42-.14-.01-.31-.01-.48-.01-.17 0-.43.06-.66.31-.23.25-.86.84-.86 2.05 0 1.21.88 2.38 1 2.54.12.17 1.73 2.64 4.2 3.7.59.25 1.05.4 1.4.52.59.19 1.13.16 1.55.1.47-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.14-1.18-.06-.11-.23-.17-.48-.29z"/></svg>
+        WhatsApp
+      </a>
+      <a href="#contact" class="nav-cta">Let's talk →</a>
     </div>
+    <button class="nav-toggle" aria-label="Menu" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+</header>
 
-    <!-- ========================================
-         ABOUT SECTION
-    ======================================== -->
-    <section id="about" class="container reveal">
-        <div class="section-header">
-            <div class="section-tag">Who I Am</div>
-            <h2 class="section-title">About Me</h2>
-            <p class="section-subtitle">Passionate about creating digital experiences that make a difference</p>
+<main>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="eyebrow">Available for freelance work</div>
+        <h1>Hi, I'm Binish Batool — I build <span class="accent">Shopify &amp; WordPress</span> sites that businesses actually run on.</h1>
+        <div class="typed-row"><span id="typed"></span><span class="cursor">&nbsp;</span></div>
+        <p class="lead">I design and develop responsive, user-friendly websites that help businesses grow online — combining clean code with strategic thinking across WordPress, Shopify, and modern web technologies.</p>
+        <div class="hero-btns">
+          <a href="#work" class="btn btn-primary">View my work</a>
+          <a href="#contact" class="btn btn-ghost">Get in touch</a>
         </div>
-        <div class="about-grid">
-            <div class="about-content">
-                <h3>Professional Web Developer with a Passion for Excellence</h3>
-                <p>
-                    I'm a <span class="highlight-text">professional web developer</span> passionate about creating responsive, user-friendly websites that help businesses grow online. With hands-on experience across WordPress, Shopify, and modern web technologies, I transform complex requirements into smooth, optimized digital experiences.
-                </p>
-                <p>
-                    My development approach combines <span class="highlight-text">clean code with strategic thinking</span>. I don't just build websites—I create digital solutions that are fast, accessible, and designed to convert. Whether it's a custom WordPress theme, a Shopify e-commerce store, or a fully responsive web application, I focus on delivering quality that performs.
-                </p>
-                <p>
-                    I'm detail-oriented, performance-focused, and believe that every pixel matters. I ensure responsive design across all devices with clean, maintainable code while making the development process transparent and collaborative.
-                </p>
-            </div>
-            <div class="about-highlights">
-                <div class="highlight-card">
-                    <div class="highlight-icon">⚡</div>
-                    <h4>Lightning Fast Performance</h4>
-                    <p>Optimized code and assets for blazing-fast load times and smooth interactions.</p>
-                </div>
-                <div class="highlight-card">
-                    <div class="highlight-icon">🎨</div>
-                    <h4>Clean, Modern Design</h4>
-                    <p>Pixel-perfect, responsive designs that look stunning on every device.</p>
-                </div>
-                <div class="highlight-card">
-                    <div class="highlight-icon">📈</div>
-                    <h4>Conversion-Focused</h4>
-                    <p>Strategic design choices that drive engagement and boost conversions.</p>
-                </div>
-                <div class="highlight-card">
-                    <div class="highlight-icon">🛠️</div>
-                    <h4>Ongoing Support</h4>
-                    <p>Dedicated support and maintenance to keep your site running smoothly.</p>
-                </div>
-            </div>
+      </div>
+      <div class="browser-mock">
+        <div class="browser-bar">
+          <span class="dots"><span></span><span></span><span></span></span>
+          <span class="url">https://binishbatool.com</span>
         </div>
-    </section>
-
-    <!-- ========================================
-         SKILLS SECTION
-    ======================================== -->
-    <section id="skills" class="container reveal">
-        <div class="section-header">
-            <div class="section-tag">Expertise</div>
-            <h2 class="section-title">Skills & Technologies</h2>
-            <p class="section-subtitle">Proficient in modern web development tools and frameworks</p>
+        <div class="browser-body" style="padding:16px;">
+          <div class="avatar-frame">
+            <img src="https://i.ibb.co/00x418W/Gemini-Generated-Image-haqq7hhaqq7hhaqq.png" alt="Binish Batool portrait">
+            <div class="avatar-caption">
+              <div>
+                <div class="name">Binish Batool</div>
+                <div class="role">Web Developer · Shopify Expert</div>
+              </div>
+              <span class="avatar-badge">Available now</span>
+            </div>
+          </div>
         </div>
-        <div class="skills-grid">
-            <div class="skill-card">
-                <div class="skill-icon">💻</div>
-                <h3>Frontend Development</h3>
-                <p>Modern, responsive interfaces with clean code</p>
-                <div class="skill-tags">
-                    <span class="skill-tag">HTML5</span>
-                    <span class="skill-tag">CSS3</span>
-                    <span class="skill-tag">JavaScript</span>
-                    <span class="skill-tag">Bootstrap</span>
-                    <span class="skill-tag">React.js</span>
-                </div>
-            </div>
+      </div>
+    </div>
+  </section>
 
-            <div class="skill-card">
-                <div class="skill-icon">🛍️</div>
-                <h3>CMS & E-Commerce</h3>
-                <p>Expert in WordPress and Shopify platforms</p>
-                <div class="skill-tags">
-                    <span class="skill-tag">WordPress</span>
-                    <span class="skill-tag">Shopify</span>
-                    <span class="skill-tag">Theme Dev</span>
-                </div>
-            </div>
+  <!-- STATS -->
+  <section class="stats reveal">
+    <div class="wrap">
+      <div class="stat"><h3>35+</h3><p>PROJECTS DELIVERED</p></div>
+      <div class="stat"><h3>2+</h3><p>YEARS EXPERIENCE</p></div>
+      <div class="stat"><h3>95%</h3><p>CLIENT SATISFACTION</p></div>
+      <div class="stat"><h3>16</h3><p>SHOPIFY &amp; WORDPRESS BUILDS BELOW</p></div>
+    </div>
+  </section>
 
-            <div class="skill-card">
-                <div class="skill-icon">🎨</div>
-                <h3>Design Tools</h3>
-                <p>Creating beautiful, on-brand visual content</p>
-                <div class="skill-tags">
-                    <span class="skill-tag">Canva</span>
-                    <span class="skill-tag">UI/UX</span>
-                    <span class="skill-tag">Responsive</span>
-                </div>
-            </div>
+  <!-- PROJECTS -->
+  <section id="work">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="eyebrow">Selected work</div>
+        <h2>Real sites, for real businesses.</h2>
+        <p>A mix of Shopify stores and WordPress sites — corporate, e-commerce, and event platforms — each tailored to how the client actually works.</p>
+      </div>
 
-            <div class="skill-card">
-                <div class="skill-icon">⚙️</div>
-                <h3>Optimization & SEO</h3>
-                <p>Performance tuning and search visibility</p>
-                <div class="skill-tags">
-                    <span class="skill-tag">Speed</span>
-                    <span class="skill-tag">SEO</span>
-                    <span class="skill-tag">Analytics</span>
-                </div>
-            </div>
-        </div>
-    </section>
+      <div class="filter-row reveal">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="shopify">Shopify</button>
+        <button class="filter-btn" data-filter="wordpress">WordPress</button>
+      </div>
 
-    <!-- ========================================
-         EXPERIENCE TIMELINE
-    ======================================== -->
-    <section id="experience" class="reveal" style="background: var(--bg-secondary); padding: var(--space-3xl) 0;">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-tag">Career Journey</div>
-                <h2 class="section-title">Work Experience</h2>
-                <p class="section-subtitle">Building expertise through hands-on development</p>
-            </div>
+      <div class="projects-grid">
 
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <span class="timeline-date">Currently Working</span>
-                        <h3>Web Developer</h3>
-                        <p class="timeline-company">Talha Reviews Agency</p>
-                        <ul>
-                            <li>Building responsive, user-friendly websites using WordPress and Shopify</li>
-                            <li>Implementing clean design systems with optimized performance metrics</li>
-                            <li>Collaborating with teams to translate client requirements into technical solutions</li>
-                            <li>Ensuring cross-device compatibility and smooth user interactions</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <span class="timeline-date">2025 - 2025</span>
-                        <h3>Web Developer</h3>
-                        <p class="timeline-company">10 Techies</p>
-                        <ul>
-                            <li>Developed multiple responsive WordPress websites with clean, maintainable code</li>
-                            <li>Implemented user-friendly interfaces that improved client engagement</li>
-                            <li>Optimized website performance through strategic design practices</li>
-                            <li>Successfully managed multiple projects with attention to detail</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <span class="timeline-date">2023 - 2025</span>
-                        <h3>Web Developer (Training)</h3>
-                        <p class="timeline-company">The Xpert Solutions</p>
-                        <ul>
-                            <li>Hands-on experience with WordPress and Shopify platforms</li>
-                            <li>Mastered responsive design principles and clean code standards</li>
-                            <li>Built multiple training projects focusing on user-friendly interfaces</li>
-                            <li>Gained expertise in performance optimization and cross-platform compatibility</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <span class="timeline-date">2022 - 2023</span>
-                        <h3>Web Development Certification</h3>
-                        <p class="timeline-company">GET (Global EdTech Training)</p>
-                        <ul>
-                            <li>Completed intensive training in WordPress, React.js, Bootstrap, and JavaScript</li>
-                            <li>Hands-on projects in HTML, CSS, and responsive frameworks</li>
-                            <li>Focused on building user-friendly, responsive websites with clean code</li>
-                            <li>Strengthened foundation in modern web development best practices</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ========================================
-         FEATURED PROJECTS
-    ======================================== -->
-    <section id="projects" class="container reveal">
-        <div class="section-header">
-            <div class="section-tag">Portfolio</div>
-            <h2 class="section-title">Featured Projects</h2>
-            <p class="section-subtitle">Real-world solutions that deliver results</p>
+        <div class="project-card reveal" data-category="wordpress">
+          <div class="browser-bar">
+            <span class="dots"><span></span><span></span><span></span></span>
+            <span class="url">thexpertsolution.com</span>
+          </div>
+          <div class="project-body">
+            <div class="tag-row"><span class="tag">WordPress</span><span class="tag">Agency Site</span></div>
+            <h3>The Xpert Solution</h3>
+            <p>A digital agency website with service pages and an active blog covering web development trends — built for easy content updates by a non-technical team.</p>
+            <a class="project-link" href="https://thexpertsolution.com/" target="_blank" rel="noopener">Visit site <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></a>
+          </div>
         </div>
 
-        <div class="projects-filter">
-            <button class="filter-btn active" data-filter="All">All</button>
-            <button class="filter-btn" data-filter="Shopify">Shopify</button>
-            <button class="filter-btn" data-filter="WordPress">WordPress</button>
-            <button class="filter-btn" data-filter="Optimization">Optimization</button>
+        <div class="project-card reveal" data-category="wordpress">
+          <div class="browser-bar">
+            <span class="dots"><span></span><span></span><span></span></span>
+            <span class="url">influencerscricketleague.org</span>
+          </div>
+          <div class="project-body">
+            <div class="tag-row"><span class="tag">WordPress</span><span class="tag">Event Site</span></div>
+            <h3>Influencers Cricket League</h3>
+            <p>The official platform for Pakistan's influencer-driven T20 tournament — tournament details, sponsor and player registration forms, and a live countdown to match day.</p>
+            <a class="project-link" href="https://influencerscricketleague.org/" target="_blank" rel="noopener">Visit site <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></a>
+          </div>
         </div>
 
-        <div class="projects-grid">
-            <!-- ================= SHOPIFY PROJECTS ================= -->
-            <div class="project-card" data-category="Shopify">
-                <div class="project-image">
-                    <img src="https://i.ibb.co/ymMSF2HY/41b25ace-3934-4a23-815a-58498daf8343.png" alt="ZM Cares Shopify Project">
-                </div>
-                <div class="project-content">
-                    <div class="project-tags">
-                        <span class="project-tag">Shopify</span>
-                        <span class="project-tag">Beauty</span>
-                        <span class="project-tag">Landing</span>
-                    </div>
-                    <h3>ZM Cares</h3>
-                    <p class="project-result">
-                        ✓ Beauty & haircare store with strong hero banner, promotional sections, and clean navigation for better conversions.
-                    </p>
-                    <a href="https://zmcares.com/" target="_blank" class="project-link">Visit Website →</a>
-                </div>
-            </div>
-
-            <div class="project-card" data-category="Shopify">
-                <div class="project-image">
-                    <img src="https://i.ibb.co/QF6F66g0/601af8ec-80d0-46d8-b37c-3e3958f35122.png" alt="Yalla Oasis Shopify Project">
-                </div>
-                <div class="project-content">
-                    <div class="project-tags">
-                        <span class="project-tag">Shopify</span>
-                        <span class="project-tag">Gadgets</span>
-                        <span class="project-tag">Promo</span>
-                    </div>
-                    <h3>Yalla Oasis</h3>
-                    <p class="project-result">
-                        ✓ Multi-category gadgets store with sale-focused slider and product-driven layout for high engagement.
-                    </p>
-                    <a href="https://yallaoasis.com/" target="_blank" class="project-link">Visit Website →</a>
-                </div>
-            </div>
-
-            <div class="project-card" data-category="Shopify">
-                <div class="project-image">
-                    <img src="https://i.ibb.co/jPWwjhDf/7114a85b-8571-443d-847f-13ad42c6a6e1.png" alt="Scarves & Stories Shopify Project">
-                </div>
-                <div class="project-content">
-                    <div class="project-tags">
-                        <span class="project-tag">Shopify</span>
-                        <span class="project-tag">Fashion</span>
-                        <span class="project-tag">Seasonal</span>
-                    </div>
-                    <h3>Scarves & Stories</h3>
-                    <p class="project-result">
-                        ✓ Hijab & scarves store with seasonal campaign banner and category navigation for smooth browsing.
-                    </p>
-                    <a href="https://scarvesandstories.com/" target="_blank" class="project-link">Visit Website →</a>
-                </div>
-            </div>
-
-            <div class="project-card" data-category="Shopify">
-                <div class="project-image">
-                    <img src="https://i.ibb.co/23fXF6Pp/0f98021d-68fe-45a2-9870-223478a3a0b6.png" alt="Arbina Shopify Project">
-                </div>
-                <div class="project-content">
-                    <div class="project-tags">
-                        <span class="project-tag">Shopify</span>
-                        <span class="project-tag">Handbags</span>
-                        <span class="project-tag">Sales</span>
-                    </div>
-                    <h3>Arbina</h3>
-                    <p class="project-result">
-                        ✓ Handbags store with clean minimalist banner, discount messaging, and product-led shopping experience.
-                    </p>
-                    <a href="https://arbina.store/" target="_blank" class="project-link">Visit Website →</a>
-                </div>
-            </div>
-
-            <div class="project-card" data-category="Shopify">
-                <div class="project-image">
-                    <img src="https://i.ibb.co/5h688qJc/93e3e860-2ceb-4d82-b567-3f36564b50ae.png" alt="Pyaara Ghar Shopify Project">
-                </div>
-                <div class="project-content">
-                    <div class="project-tags">
-                        <span class="project-tag">Shopify</span>
-                        <span class="project-tag">Home Decor</span>
-                        <span class="project-tag">UI</span>
-                    </div>
-                    <h3>Pyaara Ghar</h3>
-                    <p class="project-result">
-                        ✓ Home decor store with strong visuals, category structure, and modern header layout for better usability.
-                    </p>
-                    <a href="https://pyaaraghar.store/" target="_blank" class="project-link">Visit Website →</a>
-                </div>
-            </div>
-
-            <div class="project-card" data-category="Shopify">
-                <div class="project-image">
-                    <img src="https://i.ibb.co/vMdFVZx/e20eda06-12f6-447e-8ed4-fb2e64917747.png" alt="Ruha-K Shopify Project">
-                </div>
-                <div class="project-content">
-                    <div class="project-tags">
-                        <span class="project-tag">Shopify</span>
-                        <span class="project-tag">Kitchen</span>
-                        <span class="project-tag">Branding</span>
-                    </div>
-                    <h3>Ruha-K</h3>
-                    <p class="project-result">
-                        ✓ Kitchen products brand store with premium hero banner and product-centric layout.
-                    </p>
-                    <a href="https://ruha-k.com/" target="_blank" class="project-link">Visit Website →</a>
-                </div>
-            </div>
-
-            <div class="project-card" data-category="Shopify">
-                <div class="project-image">
-                    <img src="https://i.ibb.co/KjLMQDWn/756569a7-8d11-4bf9-8c60-014afb9110cf.png" alt="MLE Trend Shopify Project">
-                </div>
-                <div class="project-content">
-                    <div class="project-tags">
-                        <span class="project-tag">Shopify</span>
-                        <span class="project-tag">General Store</span>
-                        <span class="project-tag">Campaign</span>
-                    </div>
-                    <h3>MLE Trend</h3>
-                    <p class="project-result">
-                        ✓ General store with bold discount campaign banner, clear messaging, and product showcase for offers.
-                    </p>
-                    <a href="https://mletrend.pk/" target="_blank" class="project-link">Visit Website →</a>
-                </div>
-            </div>
-
-            <div class="project-card" data-category="Shopify">
-                <div class="project-image">
-                    <img src="https://i.ibb.co/4gJc0qHy/dfad575e-7e8f-4daf-bfdc-05ea4feb20b8.png" alt="DermVE Shopify Project">
-                </div>
-                <div class="project-content">
-                    <div class="project-tags">
-                        <span class="project-tag">Shopify</span>
-                        <span class="project-tag">Skincare</span>
-                        <span class="project-tag">Landing</span>
-                    </div>
-                    <h3>DermVE</h3>
-                    <p class="project-result">
-                        ✓ Skincare brand landing with strong product visuals, benefit highlights, and clean CTA layout.
-                    </p>
-                    <a href="https://www.dermve.com/" target="_blank" class="project-link">Visit Website →</a>
-                </div>
-            </div>
-
-            <div class="project-card" data-category="Shopify">
-                <div class="project-image">
-                    <img src="https://i.ibb.co/fdB7920K/daee4768-85be-4b07-8cdf-feb4ec249284.png" alt="Divine Fragrances Shopify Project">
-                </div>
-                <div class="project-content">
-                    <div class="project-tags">
-                        <span class="project-tag">Shopify</span>
-                        <span class="project-tag">Fragrances</span>
-                        <span class="project-tag">Luxury</span>
-                    </div>
-                    <h3>Divine Fragrances</h3>
-                    <p class="project-result">
-                        ✓ Luxury fragrance store with premium hero banner, offer messaging, and elegant UI styling.
-                    </p>
-                    <a href="https://divinefragrancespk.com/" target="_blank" class="project-link">Visit Website →</a>
-                </div>
-            </div>
-
-            <div class="project-card" data-category="Shopify">
-                <div class="project-image">
-                    <img src="https://i.ibb.co/DHXHqxd0/fd7757a4-57ed-4e8b-8cd5-ccf8d7882a47.png" alt="House of Isla Shopify Project">
-                </div>
-                <div class="project-content">
-                    <div class="project-tags">
-                        <span class="project-tag">Shopify</span>
-                        <span class="project-tag">Fashion</span>
-                        <span class="project-tag">Hero</span>
-                    </div>
-                    <h3>House of Isla</h3>
-                    <p class="project-result">
-                        ✓ Fashion store with strong lifestyle hero banner and bold typography for brand identity.
-                    </p>
-                    <a href="https://houseofisla.store/" target="_blank" class="project-link">Visit Website →</a>
-                </div>
-            </div>
-
-            <div class="project-card" data-category="Shopify">
-                <div class="project-image">
-                    <img src="https://i.ibb.co/dwfTwXpJ/04478d77-2200-4f7d-b943-916fe9013bab.png" alt="Tail Ovia Shopify Project">
-                </div>
-                <div class="project-content">
-                    <div class="project-tags">
-                        <span class="project-tag">Shopify</span>
-                        <span class="project-tag">Pet Store</span>
-                        <span class="project-tag">Infographic</span>
-                    </div>
-                    <h3>Tail Ovia</h3>
-                    <p class="project-result">
-                        ✓ Pet products store with infographic-style banner, clear product benefits, and friendly visuals.
-                    </p>
-                    <a href="https://tailovia.com/" target="_blank" class="project-link">Visit Website →</a>
-                </div>
-            </div>
-
-            <div class="project-card" data-category="Shopify">
-                <div class="project-image">
-                    <img src="https://i.ibb.co/c4nszR1/d44a20c4-6a76-409f-958e-4c0044ec03a9.png" alt="Shoppiee Shopify Project">
-                </div>
-                <div class="project-content">
-                    <div class="project-tags">
-                        <span class="project-tag">Shopify</span>
-                        <span class="project-tag">Electronics</span>
-                        <span class="project-tag">Banner</span>
-                    </div>
-                    <h3>Shoppiee</h3>
-                    <p class="project-result">
-                        ✓ Electronics store with bold promotional banner and product-first layout for quick shopping.
-                    </p>
-                    <a href="https://shoppiee.store/" target="_blank" class="project-link">Visit Website →</a>
-                </div>
-            </div>
-
-            <!-- ================= WORDPRESS PROJECTS ================= -->
-            <div class="project-card" data-category="WordPress">
-                <div class="project-image">
-                    <img src="https://i.ibb.co/VYstfb88/f1ed6587-8b81-4452-ae7b-088e1e493228.png" alt="Gutsy Ninja WordPress Project">
-                </div>
-                <div class="project-content">
-                    <div class="project-tags">
-                        <span class="project-tag">WordPress</span>
-                        <span class="project-tag">Brand Site</span>
-                        <span class="project-tag">Responsive</span>
-                    </div>
-                    <h3>Gutsy Ninja Co</h3>
-                    <p class="project-result">
-                        ✓ WordPress brand website with modern hero section and responsive layout for better user experience.
-                    </p>
-                    <a href="https://gutsyninjaco.com/" target="_blank" class="project-link">Visit Website →</a>
-                </div>
-            </div>
-
-            <div class="project-card" data-category="WordPress">
-                <div class="project-image">
-                    <img src="https://i.ibb.co/Xk6YSpqQ/3a792f4f-ce9b-4243-91ab-881bfa1e63dd.png" alt="The Xpert Solution WordPress Project">
-                </div>
-                <div class="project-content">
-                    <div class="project-tags">
-                        <span class="project-tag">WordPress</span>
-                        <span class="project-tag">Corporate</span>
-                        <span class="project-tag">Services</span>
-                    </div>
-                    <h3>The Xpert Solution</h3>
-                    <p class="project-result">
-                        ✓ Corporate WordPress website with structured services layout and clean, professional UI.
-                    </p>
-                    <a href="http://thexpertssolution.com/" target="_blank" class="project-link">Visit Website →</a>
-                </div>
-            </div>
-
-            <div class="project-card" data-category="WordPress">
-                <div class="project-image">
-                    <img src="https://i.ibb.co/prhhPNQ9/50da489e-5b05-4638-8efa-2670f43a6ce6.png" alt="Property1 WordPress Project">
-                </div>
-                <div class="project-content">
-                    <div class="project-tags">
-                        <span class="project-tag">WordPress</span>
-                        <span class="project-tag">Real Estate</span>
-                        <span class="project-tag">Listings</span>
-                    </div>
-                    <h3>Property1.pk</h3>
-                    <p class="project-result">
-                        ✓ Real estate website with listing-focused layout and navigation designed for easy browsing.
-                    </p>
-                    <a href="http://property1.pk/" target="_blank" class="project-link">Visit Website →</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ========================================
-         SERVICES SECTION
-    ======================================== -->
-    <section id="services" class="reveal" style="background: var(--bg-secondary); padding: var(--space-3xl) 0;">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-tag">What I Offer</div>
-                <h2 class="section-title">Services</h2>
-                <p class="section-subtitle">Professional web development solutions tailored to your needs</p>
-            </div>
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon">🛍️</div>
-                    <h3>Shopify Store Setup</h3>
-                    <p>Complete Shopify e-commerce solutions from store setup to theme customization, payment integration, and launch support.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">🎨</div>
-                    <h3>WordPress Development</h3>
-                    <p>Custom WordPress websites with theme development, plugin integration, and responsive design that's easy to manage.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">⚡</div>
-                    <h3>Speed Optimization</h3>
-                    <p>Performance audits and optimization to achieve lightning-fast load times and improved Core Web Vitals scores.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">📱</div>
-                    <h3>Responsive Design</h3>
-                    <p>Mobile-first, responsive websites that deliver perfect experiences across all devices and screen sizes.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ========================================
-         CONTACT SECTION
-    ======================================== -->
-    <section id="contact" class="container reveal">
-        <div class="section-header">
-            <div class="section-tag">Get In Touch</div>
-            <h2 class="section-title">Let's Work Together</h2>
+        <div class="project-card reveal" data-category="wordpress">
+          <div class="browser-bar">
+            <span class="dots"><span></span><span></span><span></span></span>
+            <span class="url">moggycatfood.com</span>
+          </div>
+          <div class="project-body">
+            <div class="tag-row"><span class="tag">WordPress</span><span class="tag">Brand Site</span></div>
+            <h3>Moggy Cat Food</h3>
+            <p>A product-led storefront for a premium Pakistani cat food brand, built to showcase the full range and make it simple for customers to browse and buy.</p>
+            <a class="project-link" href="https://moggycatfood.com/" target="_blank" rel="noopener">Visit site <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></a>
+          </div>
         </div>
 
-        <div class="contact-wrapper">
-            <h2>Ready to Start Your Project?</h2>
-            <p>
-                I'm available for freelance work, collaborations, and full-time opportunities. Let's discuss how I can help bring your vision to life.
-            </p>
-
-            <form class="contact-form">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="name">Full Name</label>
-                        <input type="text" id="name" placeholder="John Doe" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email Address</label>
-                        <input type="email" id="email" placeholder="john@example.com" required>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="subject">Subject</label>
-                    <input type="text" id="subject" placeholder="Project Inquiry" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea id="message" placeholder="Tell me about your project..." required></textarea>
-                </div>
-
-                <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message →</button>
-            </form>
-
-            <div class="contact-info-grid">
-                <div class="contact-info-item">
-                    <div class="contact-icon">📧</div>
-                    <h4>Email</h4>
-                    <a href="mailto:binishbatoolbinish@gmail.com">binishbatoolbinish@gmail.com</a>
-                </div>
-                <div class="contact-info-item">
-                    <div class="contact-icon">📱</div>
-                    <h4>Phone</h4>
-                    <a href="tel:03144290617">03144290617</a>
-                </div>
-                <div class="contact-info-item">
-                    <div class="contact-icon">🌐</div>
-                    <h4>Website</h4>
-                    <a href="#">www.binishbatool.com</a>
-                </div>
-                <div class="contact-info-item">
-                    <div class="contact-icon">📍</div>
-                    <h4>Location</h4>
-                    <p style="color: var(--text-primary); font-weight: 600;">Hafeez Garden, Lahore</p>
-                </div>
-            </div>
-
-            <div class="social-links">
-                <a href="#" class="social-link">📧</a>
-                <a href="#" class="social-link">💼</a>
-                <a href="#" class="social-link">🌐</a>
-                <a href="#" class="social-link">📱</a>
-            </div>
+        <div class="project-card reveal" data-category="wordpress">
+          <div class="browser-bar">
+            <span class="dots"><span></span><span></span><span></span></span>
+            <span class="url">hudaenterprises.co</span>
+          </div>
+          <div class="project-body">
+            <div class="tag-row"><span class="tag">WordPress</span><span class="tag">B2B</span></div>
+            <h3>Huda Enterprises</h3>
+            <p>A corporate site for a packaging solutions company, presenting their services and client roster across electronics, retail, and industrial sectors.</p>
+            <a class="project-link" href="https://hudaenterprises.co/" target="_blank" rel="noopener">Visit site <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></a>
+          </div>
         </div>
-    </section>
 
-    <!-- ========================================
-         FOOTER
-    ======================================== -->
-    <footer>
-        <div class="container">
-            <p class="footer-text">© 2026 Binish Batool | Crafting Digital Excellence with <span>♥</span></p>
+        <div class="project-card reveal" data-category="wordpress">
+          <div class="browser-bar">
+            <span class="dots"><span></span><span></span><span></span></span>
+            <span class="url">raqsfragrances.com</span>
+          </div>
+          <div class="project-body">
+            <div class="tag-row"><span class="tag">WordPress</span><span class="tag">Product Catalog</span></div>
+            <h3>Raqs Fragrances</h3>
+            <p>An e-commerce store for affordable perfume impressions, organized into men's, women's, and seasonal collections with detailed scent-note breakdowns per product.</p>
+            <a class="project-link" href="https://raqsfragrances.com/" target="_blank" rel="noopener">Visit site <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></a>
+          </div>
         </div>
-    </footer>
 
-    <!-- ========================================
-         JAVASCRIPT
-    ======================================== -->
-    <script>
-        // ======== Smooth Scroll ========
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
+        <div class="project-card reveal" data-category="wordpress">
+          <div class="browser-bar">
+            <span class="dots"><span></span><span></span><span></span></span>
+            <span class="url">property1.pk</span>
+          </div>
+          <div class="project-body">
+            <div class="tag-row"><span class="tag">WordPress</span><span class="tag">Lead Forms</span></div>
+            <h3>Property1.pk</h3>
+            <p>A real estate listings portal covering cities across Pakistan, with city-based filtering and inquiry forms that route leads straight to the sales team.</p>
+            <a class="project-link" href="https://www.property1.pk/" target="_blank" rel="noopener">Visit site <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></a>
+          </div>
+        </div>
 
-        // ======== Scroll Reveal Animation ========
-        function reveal() {
-            const reveals = document.querySelectorAll('.reveal');
-            reveals.forEach(element => {
-                const windowHeight = window.innerHeight;
-                const elementTop = element.getBoundingClientRect().top;
-                const elementVisible = 100;
-                if (elementTop < windowHeight - elementVisible) {
-                    element.classList.add('active');
-                }
-            });
-        }
+        <div class="project-card reveal" data-category="shopify">
+          <div class="browser-bar">
+            <span class="dots"><span></span><span></span><span></span></span>
+            <span class="url">arfariwaj.com</span>
+          </div>
+          <div class="project-body">
+            <div class="tag-row"><span class="tag">Shopify</span><span class="tag">Fashion Retail</span></div>
+            <h3>Arfa Riwaj</h3>
+            <p>A women's ready-to-wear label with seasonal drops like the Eid Luxury collection, styled for smooth browsing across pret, formal, and kids' lines.</p>
+            <a class="project-link" href="https://www.arfariwaj.com/collections/eid-luxury-1" target="_blank" rel="noopener">Visit site <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></a>
+          </div>
+        </div>
 
-        window.addEventListener('scroll', reveal);
-        reveal();
+        <div class="project-card reveal" data-category="shopify">
+          <div class="browser-bar">
+            <span class="dots"><span></span><span></span><span></span></span>
+            <span class="url">kutsbymahwish.com</span>
+          </div>
+          <div class="project-body">
+            <div class="tag-row"><span class="tag">Shopify</span><span class="tag">Luxury Wear</span></div>
+            <h3>Kuts By Mahwish</h3>
+            <p>A luxury eastern-wear boutique with detailed product pages for hand-embroidered silk pieces and statement occasion wear.</p>
+            <a class="project-link" href="https://kutsbymahwish.com/" target="_blank" rel="noopener">Visit site <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></a>
+          </div>
+        </div>
 
-        // ======== Navbar Scroll Effect ========
-        window.addEventListener('scroll', () => {
-            const navbar = document.querySelector('.navbar');
-            if (window.scrollY > 50) navbar.classList.add('scrolled');
-            else navbar.classList.remove('scrolled');
-        });
+        <div class="project-card reveal" data-category="shopify">
+          <div class="browser-bar">
+            <span class="dots"><span></span><span></span><span></span></span>
+            <span class="url">dastoorofficial.pk</span>
+          </div>
+          <div class="project-body">
+            <div class="tag-row"><span class="tag">Shopify</span><span class="tag">Women's Fashion</span></div>
+            <h3>Dastoor Official</h3>
+            <p>An unstitched lawn and chiffon suit store built for easy collection browsing and seasonal catalog updates.</p>
+            <a class="project-link" href="https://dastoorofficial.pk/" target="_blank" rel="noopener">Visit site <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></a>
+          </div>
+        </div>
 
-        // ======== Project Filter ========
-        const filterButtons = document.querySelectorAll('.filter-btn');
-        const projectCards = document.querySelectorAll('.project-card');
+        <div class="project-card reveal" data-category="shopify">
+          <div class="browser-bar">
+            <span class="dots"><span></span><span></span><span></span></span>
+            <span class="url">mevkatan-com.myshopify.com</span>
+          </div>
+          <div class="project-body">
+            <div class="tag-row"><span class="tag">Shopify</span><span class="tag">In Development</span></div>
+            <h3>Mev Katan</h3>
+            <p>A Shopify build currently in progress — theme setup and store structure taking shape ahead of its public launch.</p>
+            <a class="project-link" href="https://mevkatan-com.myshopify.com/" target="_blank" rel="noopener">Visit site <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></a>
+          </div>
+        </div>
 
-        function applyFilter(filterValue){
-            projectCards.forEach(card => {
-                const cat = card.getAttribute('data-category');
-                if (filterValue === 'All' || cat === filterValue) {
-                    card.style.display = '';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        }
+        <div class="project-card reveal" data-category="shopify">
+          <div class="browser-bar">
+            <span class="dots"><span></span><span></span><span></span></span>
+            <span class="url">ravendocks.com</span>
+          </div>
+          <div class="project-body">
+            <div class="tag-row"><span class="tag">Shopify</span><span class="tag">Eyewear</span></div>
+            <h3>Raven Docks</h3>
+            <p>An eyewear store offering branded and customizable sunglasses, built with product variants and a smooth checkout flow.</p>
+            <a class="project-link" href="https://ravendocks.com/" target="_blank" rel="noopener">Visit site <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></a>
+          </div>
+        </div>
 
-        filterButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                filterButtons.forEach(btn => btn.classList.remove('active'));
-                button.classList.add('active');
-                applyFilter(button.getAttribute('data-filter'));
-            });
-        });
+        <div class="project-card reveal" data-category="shopify">
+          <div class="browser-bar">
+            <span class="dots"><span></span><span></span><span></span></span>
+            <span class="url">urbangrabs.store</span>
+          </div>
+          <div class="project-body">
+            <div class="tag-row"><span class="tag">Shopify</span><span class="tag">Lifestyle</span></div>
+            <h3>Urban Grabs</h3>
+            <p>A lifestyle and accessories store with a bold, streetwear-inspired layout built for everyday shoppers.</p>
+            <a class="project-link" href="https://urbangrabs.store/" target="_blank" rel="noopener">Visit site <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></a>
+          </div>
+        </div>
 
-        applyFilter('All');
+        <div class="project-card reveal" data-category="shopify">
+          <div class="browser-bar">
+            <span class="dots"><span></span><span></span><span></span></span>
+            <span class="url">desistitches.com</span>
+          </div>
+          <div class="project-body">
+            <div class="tag-row"><span class="tag">Shopify</span><span class="tag">Ethnic Wear</span></div>
+            <h3>Desi Stitches</h3>
+            <p>A stitched ethnic-wear store offering ready-made suits, organized for quick size and style selection.</p>
+            <a class="project-link" href="https://desistitches.com/" target="_blank" rel="noopener">Visit site <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></a>
+          </div>
+        </div>
 
-        // ======== Form Submission ========
-        document.querySelector('.contact-form').addEventListener('submit', (e) => {
-            e.preventDefault();
-            alert('Thank you for your message! I will get back to you soon.');
-            e.target.reset();
-        });
-    </script>
+        <div class="project-card reveal" data-category="shopify">
+          <div class="browser-bar">
+            <span class="dots"><span></span><span></span><span></span></span>
+            <span class="url">santoshkumar.pk</span>
+          </div>
+          <div class="project-body">
+            <div class="tag-row"><span class="tag">Shopify</span><span class="tag">Heritage Fashion</span></div>
+            <h3>Santosh Kumar</h3>
+            <p>A heritage-inspired fashion label's storefront, anchored by its Lahore flagship and built to carry that same styling legacy online.</p>
+            <a class="project-link" href="https://santoshkumar.pk/" target="_blank" rel="noopener">Visit site <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></a>
+          </div>
+        </div>
+
+        <div class="project-card reveal" data-category="shopify">
+          <div class="browser-bar">
+            <span class="dots"><span></span><span></span><span></span></span>
+            <span class="url">ayraofficial.shop</span>
+          </div>
+          <div class="project-body">
+            <div class="tag-row"><span class="tag">Shopify</span><span class="tag">Fashion Brand</span></div>
+            <h3>Ayra Official</h3>
+            <p>A fashion brand storefront built for clean product discovery and a straightforward shopping experience.</p>
+            <a class="project-link" href="https://ayraofficial.shop/" target="_blank" rel="noopener">Visit site <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></a>
+          </div>
+        </div>
+
+        <div class="project-card reveal" data-category="shopify">
+          <div class="browser-bar">
+            <span class="dots"><span></span><span></span><span></span></span>
+            <span class="url">timefixers.store</span>
+          </div>
+          <div class="project-body">
+            <div class="tag-row"><span class="tag">Shopify</span><span class="tag">Watches</span></div>
+            <h3>Time Fixers</h3>
+            <p>A watches and accessories store with categorized collections and a checkout flow built for quick purchase decisions.</p>
+            <a class="project-link" href="https://timefixers.store/" target="_blank" rel="noopener">Visit site <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="eyebrow">What I work with</div>
+        <h2>The toolkit behind every build.</h2>
+      </div>
+      <div class="skills-wrap reveal">
+        <div class="skill-col">
+          <h3>CMS &amp; E-Commerce</h3>
+          <div class="chip-row">
+            <span class="chip">Shopify</span>
+            <span class="chip">WordPress</span>
+            <span class="chip">Theme Development</span>
+            <span class="chip">WooCommerce</span>
+            <span class="chip">Speed Optimization</span>
+            <span class="chip">SEO</span>
+          </div>
+        </div>
+        <div class="skill-col">
+          <h3>Frontend &amp; Design</h3>
+          <div class="chip-row">
+            <span class="chip">HTML5 / CSS3</span>
+            <span class="chip">JavaScript</span>
+            <span class="chip">Bootstrap</span>
+            <span class="chip">React.js</span>
+            <span class="chip">UI/UX &amp; Canva</span>
+            <span class="chip">Responsive Design</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section id="process">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="eyebrow">How a project runs</div>
+        <h2>Three stages, start to launch.</h2>
+      </div>
+      <div class="process-grid">
+        <div class="process-card reveal">
+          <span class="num mono">01 / Discover</span>
+          <h3>Scope &amp; plan</h3>
+          <p>We map out pages, features, and content needs so the build has a clear target before any code is written.</p>
+        </div>
+        <div class="process-card reveal">
+          <span class="num mono">02 / Build</span>
+          <h3>Design &amp; develop</h3>
+          <p>Custom theme or WooCommerce setup, built for speed and structured so it's easy for you to update afterward.</p>
+        </div>
+        <div class="process-card reveal">
+          <span class="num mono">03 / Launch</span>
+          <h3>Test &amp; hand off</h3>
+          <p>Cross-device testing, performance checks, and a walkthrough so you're comfortable running the site solo.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="wrap about-grid">
+      <div class="about-card reveal">
+        <span class="mono">Quick facts</span>
+        <h3>At a glance</h3>
+        <div class="about-row"><span>Based in</span><span>Hafeez Garden, Lahore</span></div>
+        <div class="about-row"><span>Focus</span><span>Shopify &amp; WordPress</span></div>
+        <div class="about-row"><span>Currently at</span><span>Talha Reviews Agency</span></div>
+        <div class="about-row"><span>Availability</span><span>Open to freelance work</span></div>
+      </div>
+      <div class="about-text reveal">
+        <div class="eyebrow">About me</div>
+        <h2 style="margin-bottom:18px; font-size:clamp(1.6rem,3vw,2.1rem);">Professional web developer with a passion for excellence.</h2>
+        <p>I'm a professional web developer passionate about creating responsive, user-friendly websites that help businesses grow online. With hands-on experience across WordPress, Shopify, and modern web technologies, I transform complex requirements into smooth, optimized digital experiences.</p>
+        <p>My development approach combines clean code with strategic thinking. <strong>I don't just build websites — I create digital solutions that are fast, accessible, and designed to convert,</strong> with a development process that stays transparent and collaborative from first brief to launch.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="wrap">
+      <div class="contact reveal">
+        <div class="eyebrow" style="justify-content:center;">Let's build something</div>
+        <h2>Ready to start your project?</h2>
+        <p>I'm available for freelance work, collaborations, and full-time opportunities. Tell me about your business and what the site needs to do — I'll get back to you with next steps.</p>
+        <div class="hero-btns">
+          <a href="mailto:binishbatoolbinish@gmail.com" class="btn btn-primary">binishbatoolbinish@gmail.com</a>
+          <a href="https://wa.me/923144290617" class="btn btn-ghost" target="_blank" rel="noopener">WhatsApp me</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="logo"><span class="dots"><span></span><span></span><span></span></span>&nbsp;Binish Batool</div>
+        <p>Web Developer &amp; Digital Solutions Specialist, building responsive Shopify and WordPress sites for brands that want to grow online.</p>
+        <div class="footer-social">
+          <a href="mailto:binishbatoolbinish@gmail.com" aria-label="Email">📧</a>
+          <a href="tel:03144290617" aria-label="Phone">📱</a>
+          <a href="https://wa.me/923144290617" target="_blank" rel="noopener" aria-label="WhatsApp">💬</a>
+          <a href="#contact" aria-label="Contact">🌐</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Navigate</h4>
+        <ul>
+          <li><a href="#work">Work</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#process">Process</a></li>
+          <li><a href="#about">About</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Get in touch</h4>
+        <ul>
+          <li><a href="mailto:binishbatoolbinish@gmail.com">binishbatoolbinish@gmail.com</a></li>
+          <li><a href="tel:03144290617">0314 4290617</a></li>
+          <li><span>Hafeez Garden, Lahore</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> Binish Batool | Crafting Digital Excellence with ♥</span>
+      <span class="dots"><span></span><span></span><span></span></span>
+    </div>
+  </div>
+</footer>
+
+<a href="https://wa.me/923144290617" target="_blank" rel="noopener" class="wa-float" aria-label="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24" fill="#0E1A2B"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm0 18.13h-.01a8.2 8.2 0 0 1-4.18-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.36c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.83 2.42a8.18 8.18 0 0 1 2.41 5.83c0 4.55-3.7 8.21-8.25 8.21zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.17.25-.64.81-.78.97-.14.17-.29.19-.53.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.14.16-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.42-.14-.01-.31-.01-.48-.01-.17 0-.43.06-.66.31-.23.25-.86.84-.86 2.05 0 1.21.88 2.38 1 2.54.12.17 1.73 2.64 4.2 3.7.59.25 1.05.4 1.4.52.59.19 1.13.16 1.55.1.47-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.14-1.18-.06-.11-.23-.17-.48-.29z"/></svg>
+</a>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Typed text rotation
+  const phrases = ["Shopify stores.", "custom WordPress themes.", "responsive web apps.", "sites clients can actually manage."];
+  const el = document.getElementById('typed');
+  let pIndex = 0, cIndex = 0, deleting = false;
+
+  function type(){
+    const current = phrases[pIndex];
+    if(!deleting){
+      cIndex++;
+      el.textContent = current.slice(0, cIndex);
+      if(cIndex === current.length){ deleting = true; setTimeout(type, 1400); return; }
+    } else {
+      cIndex--;
+      el.textContent = current.slice(0, cIndex);
+      if(cIndex === 0){ deleting = false; pIndex = (pIndex + 1) % phrases.length; }
+    }
+    setTimeout(type, deleting ? 35 : 55);
+  }
+  type();
+
+  // Project filter tabs
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const projectCards = document.querySelectorAll('.project-card');
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filter;
+      projectCards.forEach(card => {
+        const match = filter === 'all' || card.dataset.category === filter;
+        card.classList.toggle('hidden', !match);
+      });
+    });
+  });
+
+  // Scroll reveal
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // mobile nav basic toggle style injection
+  const style = document.createElement('style');
+  style.textContent = `.nav-links.mobile-open{ display:flex !important; flex-direction:column; position:absolute; top:72px; left:0; right:0; background:#0E1A2B; padding:24px 28px; border-bottom:1px solid #2A4363; gap:18px; }`;
+  document.head.appendChild(style);
+</script>
+
 </body>
 </html>
-
-
-
-
-
-
